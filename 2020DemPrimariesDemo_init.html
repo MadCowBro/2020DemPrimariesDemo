@@ -1,4 +1,54 @@
 
+let previousCandidateId = null;
+function handleCandidateView() {
+    const candidateButton = document.getElementById("candidate_id_button");
+    const runningMateButton = document.getElementById("running_mate_id_button");
+    const candidateSummary = document.querySelector("#candidate_summary > ul");
+    const candidateIdElement = document.getElementById("candidate_id");
+    const c = Number(candidateIdElement?.value) ?? -1;
+    const candObj = e.candidate_json.find((f) => f.pk === c);
+
+    if (candidateButton) {
+        if (c === 300) {
+            candidateButton.style.display = "";
+        } else {
+            candidateButton.style.display = "none";
+        }
+    }
+
+    previousCandidateId = c;
+}
+
+function startCandidateWatcher() {
+    setInterval(() => {
+        const candidateIdElement = document.getElementById("candidate_id");
+        const currentValue = Number(candidateIdElement?.value) ?? -1;
+
+        if (currentValue !== previousCandidateId) {
+            handleCandidateView();
+        }
+    }, 100);
+}
+
+function waitForCandidateForm() {
+    const targetNode = document.getElementById("candidate_form");
+
+    if (targetNode) {
+        const newObserver = new MutationObserver((mut, obs) => {
+            handleCandidateView();
+        });
+
+        newObserver.observe(targetNode, { childList: true, subtree: true });
+
+        startCandidateWatcher();
+        handleCandidateView();
+    } else {
+        setTimeout(waitForCandidateForm, 100);
+    }
+}
+
+waitForCandidateForm();
+
 campaignTrail_temp.global_parameter_json = [
     {
         "model": "campaign_trail.global_parameter",
