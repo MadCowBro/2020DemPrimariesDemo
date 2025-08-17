@@ -16403,7 +16403,6 @@ cyoAdventure = function(a) {
     let BidenPolling = (pop_vote.find(p => p.pk === 300)).pvp
     let BerniePolling = (pop_vote.find(p => p.pk === 301)).pvp
     let WarrenPolling = (pop_vote.find(p => p.pk === 302)).pvp
-    let BloombergPolling = (pop_vote.find(p => p.pk === 303)).pvp
     let PetePolling = (pop_vote.find(p => p.pk === 304)).pvp
     let KlobucharPolling = (pop_vote.find(p => p.pk === 310)).pvp
 
@@ -16470,6 +16469,7 @@ cyoAdventure = function(a) {
         bloomberg_active += 1;
         WarrenFadeshift();
         if (bloomberg_active == 1) {
+		    let BloombergPolling = (pop_vote.find(p => p.pk === 303)).pvp
             BloombergInshift();
             menuItemsA.push(BloombergObject);
 		    e.opponents_list.push(303);
